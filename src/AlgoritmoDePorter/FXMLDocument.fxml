@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" accessibleRole="TEXT_AREA" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="389.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AlgoritmoDePorter.FXMLDocumentController">
+<AnchorPane id="AnchorPane" accessibleRole="TEXT_AREA" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="392.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AlgoritmoDePorter.FXMLDocumentController">
     <children>
       <TextArea fx:id="campoDeTexto" layoutX="14.0" layoutY="68.0" onInputMethodTextChanged="#contarPalabras" onKeyPressed="#contarPalabras" onKeyReleased="#contarPalabras" onKeyTyped="#contarPalabras" prefHeight="270.0" prefWidth="242.0" promptText="Introduzca su texto o lea un txt" wrapText="true" />
       <Label fx:id="AlgDePort" contentDisplay="CENTER" layoutX="209.0" layoutY="14.0" prefHeight="34.0" prefWidth="220.0" text="Algoritmo de Porter" textAlignment="CENTER" wrapText="true">
@@ -64,8 +64,8 @@
       </Label>
       <Hyperlink fx:id="hyperlink" layoutX="470.0" layoutY="315.0" onAction="#handleHyperlink" text="Ir al repositorio en GitHub" />
       <Label fx:id="labelCantPalabras" layoutX="477.0" layoutY="31.0" prefHeight="17.0" prefWidth="152.0" text="Cantidad de palabras: 0" />
-      <Button fx:id="leerTxt" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleButtonleerTxt" text="Leer .txt" />
-      <Label fx:id="labelTxt" layoutX="82.0" layoutY="352.0" prefHeight="21.0" prefWidth="220.0">
+      <Button fx:id="leerTxt" layoutX="14.0" layoutY="350.0" mnemonicParsing="false" onAction="#handleButtonleerTxt" text="Leer .txt (solo para txt codificado en ANSI)" />
+      <Label fx:id="labelTxt" layoutX="271.0" layoutY="352.0" prefHeight="21.0" prefWidth="220.0">
          <font>
             <Font size="15.0" />
          </font>

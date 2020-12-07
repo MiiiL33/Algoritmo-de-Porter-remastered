@@ -59,9 +59,9 @@ public class AgregaPalabras{
             if(this.palabras[j].equals("&"))
                 break;
             if(this.cantidad[j]==1)
-                resultado=resultado+(this.palabras[j].trim() +"\t\t"+this.cantidad[j] +"\tvez\n");
+                resultado=resultado+(this.palabras[j] +this.cantidad[j] +" vez\n");
             else if(this.cantidad[j]>1)
-                resultado=resultado+(this.palabras[j].trim() +"\t\t"+this.cantidad[j]+"\tveces\n");
+                resultado=resultado+(this.palabras[j] +this.cantidad[j]+" veces\n");
         }
         return resultado.trim();
     }

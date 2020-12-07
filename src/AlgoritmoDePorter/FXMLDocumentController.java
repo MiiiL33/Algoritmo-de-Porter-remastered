@@ -4,8 +4,10 @@ import java.net.URL;
 import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -47,22 +49,22 @@ public class FXMLDocumentController implements Initializable{
         FileChooser.ExtensionFilter ef = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         fc.getExtensionFilters().add(ef);
         File file = fc.showOpenDialog(null);
-        BufferedReader reader = new BufferedReader(new FileReader (file));
-        String         line = null;
-        StringBuilder  stringBuilder = new StringBuilder();
-        String         ls = System.getProperty("line.separator");
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "Cp1252"));
+        String linea = null;
+        StringBuilder sb = new StringBuilder();
+        String ls = System.getProperty("line.separator");
         try{
-            while((line = reader.readLine()) != null) {
-                stringBuilder.append(line);
-                stringBuilder.append(ls);
+            while((linea = br.readLine()) != null) {
+                sb.append(linea);
+                sb.append(ls);
             }
-            String texto = stringBuilder.toString();
+            String texto = sb.toString();
             campoDeTexto.setText(texto);
             labelTxt.setText("Archivo .txt leido correctamente");
             cantidad=cp.cuentaPalabras(texto);
             labelCantPalabras.setText("Cantidad de palabras: " + cantidad);
         } finally {
-            reader.close();
+            br.close();
         }
     }
     
@@ -74,7 +76,7 @@ public class FXMLDocumentController implements Initializable{
     @FXML private void handleHyperlink(ActionEvent event){ //abre un enlace en el navegador predeterminado al repositorio
         try{
             Desktop d=Desktop.getDesktop();
-            d.browse(new URI("https://github.com/MiiiL33/Algoritmo-de-Porter-UTEM"));
+            d.browse(new URI("https://github.com/MiiiL33/Algoritmo-de-Porter-remastered"));
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -88,7 +90,7 @@ public class FXMLDocumentController implements Initializable{
             texto=texto.toLowerCase();
             System.out.println("Eliminando tildes");
             Regex regex=new Regex();
-            texto=regex.borrarTildes(texto) ;
+            texto=regex.borrarTildes(texto);
             System.out.println("Quitando signos de puntuación y números");
             texto=regex.borrarPuntuacionYNumeros(texto);
             System.out.println("Eliminando texto residual");

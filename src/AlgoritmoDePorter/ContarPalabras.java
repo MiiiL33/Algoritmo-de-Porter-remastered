@@ -3,9 +3,8 @@ package AlgoritmoDePorter;
 public class ContarPalabras{
     private AgregaPalabras Indice;
     public int cuentaPalabras(String Texto){
-        if (Texto == null || Texto.isEmpty()){
+        if (Texto == null || Texto.isEmpty())
             return 0;
-        }
         String[] palabras=Texto.split("\\s+");
         return palabras.length;
     }
@@ -20,7 +19,7 @@ public class ContarPalabras{
                 agregar=agregar+Texto.charAt(j);
             }
             else{
-                Indice.AñadirPalabraSingular(agregar); 
+                Indice.AñadirPalabraSingular(agregar+" - "); 
                 agregar="";
             }
         }
