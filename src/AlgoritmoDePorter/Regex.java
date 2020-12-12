@@ -51,12 +51,13 @@ public class Regex{
     private final String sufijoAnte=(letras+"*(ante)"+findepalabra);
     private final String sufijoLo=(letras+"*(l[o|a])"+findepalabra);
     /////////////////////Eliminación de pronombres/////////////////////
-    private final String pronombreAlguien=(findepalabra+"alguien"+findepalabra);
-    private final String pronombreAlgun=(findepalabra+"algun[os|as]*"+findepalabra);
-    private final String pronombreAquel=(findepalabra+"aquel"+findepalabra);
-    private final String pronombreAquell=(findepalabra+"aquell[o|a][s]*"+findepalabra);
-    private final String pronombreBastante=(findepalabra+"bastante[s]*"+findepalabra);        
-    private final String pronombreConmigo=(findepalabra+"con[m|s]igo"+findepalabra);
+    private final String pronombreAlguien=(findepalabra+"(alguien)"+findepalabra);
+    private final String pronombreAlgun=(findepalabra+"(algun[os|as])*"+findepalabra);
+    private final String pronombreAquel=(findepalabra+"(aquel)"+findepalabra);
+    private final String pronombreAquell=(findepalabra+"(aquell[o|a][s]*)"+findepalabra);
+    private final String pronombreBastante=(findepalabra+"(bastante[s]*)"+findepalabra);        
+    private final String pronombreConmigo=(findepalabra+"(con[m|s]igo)"+findepalabra);
+    private final String pronombreDel=(findepalabra+"([d]*el)"+findepalabra);
     private final String pronombreDos=(findepalabra+"dos"+findepalabra);
     private final String pronombreTres=(findepalabra+"tres"+findepalabra);
     private final String pronombreCuatro=(findepalabra+"cuatro"+findepalabra);
@@ -97,7 +98,7 @@ public class Regex{
     private final String pronombreComo=(findepalabra+"como"+findepalabra);
     /////////////////////Eliminación de artículos/////////////////////
     private final String articuloEn = findepalabra+"en"+findepalabra;
-    private final String articuloEl = findepalabra+"el"+findepalabra;
+    private final String articuloEl = findepalabra+"[d]*el"+findepalabra;
     private final String articuloLa = findepalabra+"la"+findepalabra;
     private final String articuloLos = findepalabra+"los"+findepalabra;
     private final String articuloLas = findepalabra+"las"+findepalabra;
@@ -107,13 +108,27 @@ public class Regex{
     private final String articuloUna = findepalabra+"una"+findepalabra;
     private final String articuloUnas = findepalabra+"unas"+findepalabra;
     private final String articuloDe = findepalabra+"de[l]*"+findepalabra;
-    private final String articuloQue = findepalabra+"que"+findepalabra;
     private final String articuloComo = findepalabra+"como"+findepalabra;
     private final String articuloCuando = findepalabra+"cuando"+findepalabra;
     private final String articuloDonde = findepalabra+"donde"+findepalabra;
     private final String articuloQuien = findepalabra+"quien"+findepalabra;
     private final String articuloPor = findepalabra+"por"+findepalabra;
+    private final String articuloAnte = findepalabra+"ante"+findepalabra;
+    private final String articuloCon = findepalabra+"con"+findepalabra;
+    private final String articuloContra = findepalabra+"contra"+findepalabra;
     private final String articuloPara = findepalabra+"para"+findepalabra;
+    private final String articuloDesde = findepalabra+"desde"+findepalabra;
+    private final String articuloDurante = findepalabra+"durante"+findepalabra;
+    private final String articuloEntre = findepalabra+"entre"+findepalabra;
+    private final String articuloHacia = findepalabra+"hacia"+findepalabra;
+    private final String articuloHasta = findepalabra+"hasta"+findepalabra;
+    private final String articuloMediante = findepalabra+"mediante"+findepalabra;
+    private final String articuloSegun = findepalabra+"segun"+findepalabra;
+    private final String articuloSin = findepalabra+"sin"+findepalabra;
+    private final String articuloSobre = findepalabra+"sobre"+findepalabra;
+    private final String articuloTras = findepalabra+"tras"+findepalabra;
+    private final String articuloVersus = findepalabra+"versus"+findepalabra;
+    private final String articuloVia = findepalabra+"via"+findepalabra;
     
     public String borrarTildes(String texto){
         String reemplazo;
@@ -201,6 +216,7 @@ public class Regex{
         Pattern patternVosotros=Pattern.compile(pronombreVosotros);
         Pattern patternVuestro=Pattern.compile(pronombreVuestro);
         Pattern patternYo=Pattern.compile(pronombreYo);
+        Pattern patternDel=Pattern.compile(pronombreDel);
         //comparando con cada pronombre, para luego reemplazar
         Matcher empareja = patternAlguien.matcher(texto);
         reemplazo=empareja.replaceAll("");
@@ -212,7 +228,11 @@ public class Regex{
         reemplazo=empareja.replaceAll("");
         empareja=patternBastante.matcher(reemplazo);
         reemplazo=empareja.replaceAll("");
+        empareja=patternDel.matcher(reemplazo);
+        reemplazo=empareja.replaceAll("");
         empareja=patternConmigo.matcher(reemplazo);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternComo.matcher(reemplazo);
         reemplazo=empareja.replaceAll("");
         empareja=patternDos.matcher(reemplazo);
         reemplazo=empareja.replaceAll("");
@@ -308,13 +328,27 @@ public class Regex{
         Pattern patternUna=Pattern.compile(articuloUna);
         Pattern patternUnas=Pattern.compile(articuloUnas);
         Pattern patternDe=Pattern.compile(articuloDe);
-        Pattern patternQue=Pattern.compile(articuloQue);
         Pattern patternComo=Pattern.compile(articuloComo);
         Pattern patternCuando=Pattern.compile(articuloCuando);
         Pattern patternDonde=Pattern.compile(articuloDonde);
         Pattern patternQuien=Pattern.compile(articuloQuien);
         Pattern patternPor=Pattern.compile(articuloPor);
         Pattern patternPara=Pattern.compile(articuloPara);
+        Pattern patternAnte=Pattern.compile(articuloAnte);
+        Pattern patternCon=Pattern.compile(articuloCon);
+        Pattern patternContra=Pattern.compile(articuloContra);
+        Pattern patternDesde=Pattern.compile(articuloDesde);
+        Pattern patternDurante=Pattern.compile(articuloDurante);
+        Pattern patternEntre=Pattern.compile(articuloEntre);
+        Pattern patternHacia=Pattern.compile(articuloHacia);
+        Pattern patternHasta=Pattern.compile(articuloHasta);
+        Pattern patternMediante=Pattern.compile(articuloMediante);
+        Pattern patternSegun=Pattern.compile(articuloSegun);
+        Pattern patternSin=Pattern.compile(articuloSin);
+        Pattern patternSobre=Pattern.compile(articuloSobre);
+        Pattern patternTras=Pattern.compile(articuloTras);
+        Pattern patternVersus=Pattern.compile(articuloVersus);
+        Pattern patternVia=Pattern.compile(articuloVia);
         String reemplazo;
         Matcher empareja=patternEn.matcher(texto);
         reemplazo=empareja.replaceAll("");
@@ -338,8 +372,6 @@ public class Regex{
         reemplazo=empareja.replaceAll("");
         empareja=patternDe.matcher(reemplazo);
         reemplazo=empareja.replaceAll("");
-        empareja=patternQue.matcher(reemplazo);
-        reemplazo=empareja.replaceAll("");
         empareja=patternComo.matcher(reemplazo);
         reemplazo=empareja.replaceAll("");
         empareja=patternCuando.matcher(reemplazo);
@@ -354,6 +386,36 @@ public class Regex{
         reemplazo=empareja.replaceAll("");
         empareja=espconsec.matcher(reemplazo);
         reemplazo=empareja.replaceAll(" ");
+        empareja=patternAnte.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternCon.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternContra.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternDesde.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternDurante.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternEntre.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternHacia.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternHasta.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternMediante.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternSegun.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternSin.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternSobre.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternTras.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternVersus.matcher(texto);
+        reemplazo=empareja.replaceAll("");
+        empareja=patternVia.matcher(texto);
+        reemplazo=empareja.replaceAll("");
         if (reemplazo.charAt(0) == (' ')) return reemplazo.substring(1);
         return reemplazo;
     }
@@ -477,8 +539,8 @@ public class Regex{
     }
     public String borrarTextoResidual(String Texto){
         Pattern espconsec=Pattern.compile(espaciosconsecutivos);
-        Pattern adicional=Pattern.compile("[¿|¡|–|…|³|º]");
-        Pattern residuo=Pattern.compile("\\b[a-z]{1,2}\\b"); //quita palabras de 2 caracteres o menos
+        Pattern adicional=Pattern.compile("[¿|¡|–|…|³|º|—]");
+        Pattern residuo=Pattern.compile("\\b[a-z]{1,3}\\b"); //quita palabras de 2 caracteres o menos
         Pattern espacio=Pattern.compile("[\\n|\t]"); //quita tabulaciones
         Pattern saltosDeLinea=Pattern.compile("\\s{1,}"); //quita uno o mas saltos de línea
         Pattern otro=Pattern.compile(otros);
